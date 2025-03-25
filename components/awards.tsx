@@ -146,7 +146,7 @@ export default function Awards() {
                   </div>
                   <div>
                     <h3
-                      className={`text-xl font-bold mb-1 group-hover:text-cyan-400 transition-colors duration-300 ${award.highlight ? "text-purple-300" : "text-white"}`}
+                      className={`text-lg font-bold mb-1 group-hover:text-cyan-400 transition-colors duration-300 ${award.highlight ? "text-purple-300" : "text-white"}`}
                     >
                       {award.title}
                     </h3>
