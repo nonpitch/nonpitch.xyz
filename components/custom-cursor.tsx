@@ -4,19 +4,51 @@ import { motion } from "framer-motion"
 
 export default function CustomCursor() {
   const [mounted, setMounted] = useState(false)
-  // Set initial position to middle top of page
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [isPointer, setIsPointer] = useState(false)
-  // Start with cursor visible
   const [isVisible, setIsVisible] = useState(true)
 
   useEffect(() => {
-    // Set initial position to middle top after mounting
-    setPosition({ x: window.innerWidth / 2, y: 200 })
+    // Set mounted state
     setMounted(true)
 
+    // Try to restore the cursor position from localStorage
+    try {
+      const savedX = localStorage.getItem("cursorX")
+      const savedY = localStorage.getItem("cursorY")
+
+      if (savedX && savedY) {
+        setPosition({
+          x: Number.parseInt(savedX, 10),
+          y: Number.parseInt(savedY, 10),
+        })
+      } else {
+        // Fallback to center of viewport if no saved position
+        setPosition({
+          x: window.innerWidth / 2,
+          y: window.innerHeight / 2,
+        })
+      }
+    } catch (e) {
+      // Fallback if localStorage is not available
+      setPosition({
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2,
+      })
+    }
+
+    // Function to update cursor position and state
     const updatePosition = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY })
+      const newPosition = { x: e.clientX, y: e.clientY }
+      setPosition(newPosition)
+
+      // Save position to localStorage
+      try {
+        localStorage.setItem("cursorX", newPosition.x.toString())
+        localStorage.setItem("cursorY", newPosition.y.toString())
+      } catch (e) {
+        // Ignore localStorage errors
+      }
 
       const target = e.target as HTMLElement
       const isClickable =
@@ -25,12 +57,14 @@ export default function CustomCursor() {
         target.closest("button") ||
         target.closest("a") ||
         window.getComputedStyle(target).cursor === "pointer"
+
     }
 
     // Only handle mouse leave, keep visible by default
     const handleMouseLeave = () => setIsVisible(false)
     const handleMouseEnter = () => setIsVisible(true)
 
+    // Add event listeners
     window.addEventListener("mousemove", updatePosition)
     document.addEventListener("mouseenter", handleMouseEnter)
     document.addEventListener("mouseleave", handleMouseLeave)
@@ -69,7 +103,6 @@ export default function CustomCursor() {
       {/* Main cursor ring */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-50 custom-cursor"
-        // No initial opacity: 0 to make it visible immediately
         animate={{
           x: position.x - (isPointer ? 15 : 10),
           y: position.y - (isPointer ? 15 : 10),
@@ -91,7 +124,6 @@ export default function CustomCursor() {
       {/* Cursor dot */}
       <motion.div
         className="fixed top-0 left-0 w-2 h-2 rounded-full bg-cyan-400 pointer-events-none z-50 shadow-[0_0_5px_rgba(34,211,238,0.9)] custom-cursor"
-        // No initial opacity: 0 to make it visible immediately
         animate={{
           x: position.x - 7,
           y: position.y - 7,
