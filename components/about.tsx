@@ -53,7 +53,7 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center "style={{ textAlign: 'justify' }}>
           <motion.div variants={itemVariants} className="space-y-6 order-2 md:order-1">
             <p className="text-lg text-gray-300">
-            I’m a passionate Product Owner and a Computer Engineering (International) student @KMUTT with hands-on experience 
+            I’m <span className="font-bold">Pitchayapat Wareevanich</span> a Computer Engineering (International) student at King Mongkut's University of Technology Thonburi with experiences 
             in digital product development through part-time, internships and academic projects. 
             </p>
             <p className="text-lg text-gray-300">

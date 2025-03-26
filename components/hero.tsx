@@ -68,12 +68,11 @@ export default function Hero() {
           className="mb-8"
         >
           <h2 className="text-2xl md:text-4xl font-light">
-            Hi, I'm <span className="font-bold">Pitchayapat Wareevanich</span>
-          </h2>
-          <h3 className="text-2xl md:text-3xl font-light mt-1">
-            <span className="text-cyan-400">Product Owner</span> |{" "}
+            Hi, I'm <span className="font-bold">Nonpitch</span> - <span className="text-cyan-400">Product Owner</span> |{" "}
             <span className="text-purple-500">Technologist</span> |{" "}
-            <span className="text-blue-500">Award-Winning Innovator</span>
+          </h2>
+          <h3 className="text-2xl md:text-4xl font-light">
+          <span className="text-blue-500">Award-Winning Innovator</span>
           </h3>
         </motion.div>
 
