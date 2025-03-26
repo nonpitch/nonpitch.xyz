@@ -12,6 +12,7 @@ import Footer from "@/components/footer"
 import CustomCursor from "@/components/custom-cursor"
 import ParticleBackground from "@/components/particle-background"
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -39,6 +40,7 @@ export default function Home() {
         <Awards />
         <Footer />
         <Analytics/>
+        <SpeedInsights/>
       </div>
     </main>
   )
